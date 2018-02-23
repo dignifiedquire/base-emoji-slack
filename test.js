@@ -7,6 +7,12 @@ const { toBaseEmoji } = require('./commands')
 describe('base-emoji-slack', () => {
   it('toBaseEmoji', () => {
     expect(
+      toBaseEmoji('hello')
+    ).to.be.eql(
+      ':droplet::dolphin::facepunch::facepunch::flashlight:'
+    )
+
+    expect(
       toBaseEmoji('0x00')
     ).to.be.eql(
       ':shit:'

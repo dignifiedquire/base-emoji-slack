@@ -11,7 +11,13 @@ exports.toBaseEmoji = (input) => {
   if (input.startsWith('0x')) {
     input = input.slice(2)
   }
-  return exports.jbenetSpecial(baseEmoji.toNames(Buffer.from(input, 'hex')))
+
+  buf = Buffer.from(input, 'hex')
+  if (buf.toString('hex') !== input) {
+    buf = Buffer.from(input, 'utf8')
+  }
+
+  return exports.jbenetSpecial(baseEmoji.toNames(buf))
 }
 
 exports.createErrorAttachment = (error) => ({
@@ -32,7 +38,7 @@ exports.slackCommand = (slackToken) => {
     }
 
     const emojis = exports.toBaseEmoji(body.text)
-    console.log('return: %s', emojis)
+
     return {
       text: emojis,
       attachments: []
