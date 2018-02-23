@@ -2,6 +2,8 @@
 
 const baseEmoji = require('base-emoji')
 
+const IN_CHANNEL = 'in_channel'
+
 exports.jbenetSpecial = (names) => {
   return names.replace(/100/g, 'shit')
 }
@@ -40,6 +42,7 @@ exports.slackCommand = (slackToken) => {
     const emojis = exports.toBaseEmoji(body.text)
 
     return {
+      response_type: IN_CHANNEL,
       text: emojis,
       attachments: []
     }
